@@ -161,9 +161,3 @@ PrintCategoryScore(ActualAllCategories) # prints individual category results
 TeamScores(NovCategories,3) # prints novice team scores
 
 TeamScores(AllCategories,4) # prints experienced team scores
-
-"""
-Next thing to do is to make it so that it takes at most 3/4 archers from each
-club per novice/experienced to create a team with, but call at least 1 or none
-archers without error
-"""
