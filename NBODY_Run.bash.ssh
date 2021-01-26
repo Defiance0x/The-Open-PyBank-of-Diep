@@ -1,0 +1,40 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=6
+# Define the working directory
+export /home/jamiediep="/newhome/jd16581"
+cd $PBS_O_WORKDIR
+#-------------------------------------------------
+# Determine which nodes the job has
+# been allocated to and create a
+# machinefile for mpirun
+#-------------------------------------------------
+# Don’t change anything below this line
+#-------------------------------------------------
+# Get the job number
+export JOBNO="’echo $PBS_JOBID | sed s/.master.cm.cluster//’"
+# Generate mpirun machinefile -------------------
+export CONF="$MYDIR/machines.$JOBNO"
+for i in ’cat $PBS_NODEFILE’;
+do echo $i >> $CONF
+done
+# Get the number of processors -----------------
+export NUMPROC=’cat $PBS_NODEFILE|wc -l’
+# Execute the code ------------------------------
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 16
+"""
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 15
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 14
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 13
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 12
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 11
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 10
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 9
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 8
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 7
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 6
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 5
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 4
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 3
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 2
+mpiexec -machinefile $CONF -np $NUMPROC python ./Python/N_Body_Just_Python.py 1
+"""
