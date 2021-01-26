@@ -5,7 +5,7 @@ os.environ["OMP_NUM_THREADS"] = "1"
 
 import numpy as np
 
-from mpi4py import MPI
+from mpi4py import MPI    # using MPI4PY as the parallelisation method
 
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
@@ -161,7 +161,9 @@ def force_integrator(bods):
             for i in np.arange(start = 1, stop = size):
                 yc += comm.recv(source=i)
 
-#        if rank == 0:
+# uncomment the below to save a .mp4 of what is happening
+                
+#        if rank == 0:        
 #            
 #            step = plt.scatter(xc,yc,color='b') # make one node collect data
 #            ims.append([step]) # same for this line
